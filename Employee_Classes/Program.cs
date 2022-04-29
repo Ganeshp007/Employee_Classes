@@ -5,6 +5,10 @@ using Employee_Classes;
     Console.WriteLine("Press ENter to Continue...\n");
     Console.ReadKey();
 
-    CalEmpwage.CalEmpHr();
-    CalEmpwage.Calwage();
-    
+CalEmpwage.CalEmpHr("Dmart",20,100);//CompnayNAme,MaxWorkingDays,MaxWorkingHr
+CalEmpwage.TotalWage(20);//Emp_RAte_Hr
+
+CalEmpwage.CalEmpHr("Amazon", 20, 100);
+CalEmpwage.TotalWage(40);
+
+

@@ -6,57 +6,60 @@ using System.Threading.Tasks;
 
 namespace Employee_Classes
 {
-    internal class CalEmpwage
+     public class CalEmpwage
     {
- 
-            public const int Is_Fulltime = 1;
-            public const int Is_Parttime = 2;
-            
-            public static int TotalEmpwage = 0;
-            public static int TotalEmpHr = 0;
-            
-        public static int CalEmpHr(String CmpName,int MaxWorkingDays,int MaxWorkingHr)
+        public const int Is_Parttime = 1;
+        public const int Is_Fulltime = 2;
+
+        private int Emp_Rate_Hr;
+        private int NumOfWorkingDays;
+        private int MaxHrPerMonth;
+        private int Totalwage;
+        private string CmpName;
+
+
+        public CalEmpwage (String CmpName,int Emp_Rate_Hr,int NumOfWorkingDays,int MaxHrPerMonth)
         {
-            int Emp_Hr = 0,TotalWorkingDays = 0;
-
-            while (TotalEmpHr <= MaxWorkingHr && TotalWorkingDays < MaxWorkingDays)
-            {
-                Random obj = new Random();
-                int empcheck = obj.Next(0, 3); //it will generate 0 and 1 only bcoz its limit is n-1 ie 2-1=1
-
-                if (empcheck == Is_Fulltime)
-                {
-                    //Console.WriteLine("Employee is Fulltime\n");
-                    Emp_Hr = 8;
-                }
-                else if (empcheck == Is_Parttime)
-                {
-                   // Console.WriteLine("Employee is Parttime\n");
-                    Emp_Hr = 4;
-                }
-                else
-                {
-                    Emp_Hr = 0;
-                    //Console.WriteLine("Employee is Absent\n");
-                }
-
-                TotalEmpHr += Emp_Hr;
-                TotalWorkingDays++;
-
-            }
-            Console.WriteLine("Company Name Of Employee:- "+CmpName);
-            Console.WriteLine("Total working Hr of cureent EMployee:- " + TotalEmpHr);
-            return TotalEmpHr;
+           this.CmpName = CmpName;
+            this.MaxHrPerMonth = MaxHrPerMonth;
+            this.Emp_Rate_Hr = Emp_Rate_Hr;
+           this.NumOfWorkingDays = NumOfWorkingDays;
         }
 
-        public static int TotalWage(int Emp_Rate_Hr)
+        public void Find_Wage()
         {
-             TotalEmpwage = Emp_Rate_Hr * TotalEmpHr;
-            Console.WriteLine("\nWage of current Empolyee is :- " + TotalEmpwage);
+            int Emp_Hr = 0;
+            int Total_Emp_Hr = 0;
+            int Total_NumOfDays = 1;
+            Console.WriteLine("\nEmployee Record: -\n");
+            while (Total_Emp_Hr <= MaxHrPerMonth && Total_NumOfDays <= NumOfWorkingDays)
+            {   
+                Random obj = new Random();
+                int empcheck = obj.Next(0, 3);
 
-            return TotalEmpwage;
+                switch (empcheck)
+                {
+                    case Is_Fulltime: Emp_Hr = 8; break;
 
+                    case Is_Parttime: Emp_Hr = 4; break;
+
+                    default: Emp_Hr = 0; break;
+                }
+
+                Total_Emp_Hr += Emp_Hr;
+                Console.WriteLine("Day:- " + Total_NumOfDays + " Empployee Hrs:- " + Emp_Hr);
+                Total_NumOfDays++;
+            }
+            Totalwage = Total_Emp_Hr * this.Emp_Rate_Hr;
+            
+        }
+
+        public string toString()
+        {
+            return "\nTotal Wage Of current Employee for Company " + this.CmpName + " is:- " + this.Totalwage;
         }
 
     }
+
+    
 }
